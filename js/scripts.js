@@ -17,7 +17,7 @@ function moveFirstSlide() {
     carouselList.css({marginLeft:0});
 };
 
-next.click(function(){
+next.on("click", function(){
     clearInterval(slidesInterval);
     changeSlide();
     slidesInterval = setInterval(changeSlide, 5000);
@@ -38,7 +38,7 @@ function moveLastSlide() {
     firstSlide.before(lastSlide);
 };
 
-prev.click(function(){
+prev.on("click", function(){
     clearInterval(slidesInterval);
     prevSlide();
     slidesInterval = setInterval(changeSlide, 5000);
@@ -49,28 +49,29 @@ prev.click(function(){
 var controlsInterval = setInterval(checkPosition, 100);
 
 function checkPosition() {
-    var activeSlide = carouselList.find("li:first");
+
+    var activeSlideId = carouselList.find('li:first').attr("data-index");
     
     $("#control-1").css("background-color", "inherit");
     $("#control-2").css("background-color", "inherit");
     $("#control-3").css("background-color", "inherit");
     $("#control-4").css("background-color", "inherit");
-    $("#control-5").css("background-color", "inherit");   
-
-    switch (activeSlide.attr("id")) {
-        case "item-1":
+    $("#control-5").css("background-color", "inherit");  
+    
+    switch (activeSlideId) {
+        case "1":
             $("#control-1").css("background-color", "white"); 
             break;
-        case "item-2":
+        case "2":
             $("#control-2").css("background-color", "white"); 
             break;
-        case "item-3":
+        case "3":
             $("#control-3").css("background-color", "white"); 
             break;
-        case "item-4":
+        case "4":
             $("#control-4").css("background-color", "white"); 
             break;
-        case "item-5":
+        case "5":
             $("#control-5").css("background-color", "white"); 
             break;
     }  
@@ -96,7 +97,7 @@ $(function() {
             case "control-5":
                 controlSlide("item-5");
                 break;
-        }
+     }
     });
 });
 
@@ -108,4 +109,3 @@ function controlSlide(i) {
         activeSlide = carouselList.find("li:first");
     }
 }
-
